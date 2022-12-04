@@ -1,0 +1,248 @@
+﻿.headercomponent {
+    display: grid;
+    grid-template-columns: 4% minmax(95px,5%) minmax(110px,8%) 3% minmax(300px,55.5%) minmax(110px,10%) minmax(80px,6%) 5%;
+    grid-template-rows: auto;
+    width: 100%;
+    gap: 0.5%;
+}
+
+.bi-layout-text-sidebar {
+    font-size: 175%;
+    align-self:center;
+    justify-self:center;
+    _margin-left: 1%;
+}
+
+
+    .bi-layout-text-sidebar:hover {
+        font-size: 180%;
+    }
+
+.logo {
+    cursor: pointer;
+    align-self: center;
+    justify-self: center;
+    width: 80%;
+    _margin-top: 7px;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 4%;
+}
+
+    .logo:hover {
+        border: 1px solid white;
+    }
+
+.address {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 2%;
+    align-items:center;
+    justify-content:center;
+}
+
+    .address > i{
+        grid-row: 1/-1;
+        grid-column: 1;     
+    }
+
+    .address > .text-line-one {
+        grid-row: 1;
+        grid-column: 2/-1;
+        white-space: nowrap;
+    }
+
+    .address > .text-line-two {
+        grid-row: 2;
+        grid-column: 2/-1;
+        white-space: nowrap;
+    }
+
+.theme-selector {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor: pointer;
+}
+
+    .theme-selector > i {
+        font-size: 120%;
+        padding-left: 13%;
+        padding-right: 13%;
+        padding-top: 7%;
+        padding-bottom: 7%;
+        background-color: #7380ec;
+        border-radius: 10%;
+    }
+
+        .theme-selector i.active {
+            _background-color: #7380ec;
+            _border-radius: 10%;
+        }
+
+.search {
+    display: flex;
+}
+
+    .search > select {
+        border: none;
+        border-top-left-radius: 8%;
+        border-bottom-left-radius: 8%;
+        background-color: gray;
+        font-weight: 700;
+        min-width: auto;
+    }
+
+    .search > input {
+        width: 100%;
+        border: none;
+    }
+
+    .search-button {
+        background-color: purple;
+        border: none;
+        border-top-right-radius: 8%;
+        border-bottom-right-radius: 8%;
+        width: 5%;
+        min-width: 64px;
+    }
+
+        .search-button:hover {
+            background-color: rgba(254, 189, 105, 0.8);
+        }
+
+
+.sign-in, .return-orders {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto;
+}
+
+    .sign-in > .text-line-one, .return-orders > .text-line-one {
+        grid-row: 1;
+    }
+
+    .sign-in > .text-line-two, .return-orders > .text-line-two {
+        grid-row: 2;
+    }
+
+    .sign-in:hover, .return-orders:hover, .address:hover {
+        border: 1px solid white;
+    }
+
+    .bi-caret-down-fill {
+        font-size: 60%;
+    }
+
+.text-line-one {
+    font-size: 80%;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    align-self: center;
+    justify-self: center;
+    color: gray;
+}
+
+.text-line-two {
+    font-size: 85%;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    align-self: center;
+    justify-self: center;
+}
+
+.cart {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    align-items: center;
+    font-size: 185%;
+}
+
+    .cart:hover {
+        font-size: 180%;
+    }
+
+    .bi-cart {
+        grid-row: 1;
+        grid-column: 1;
+        justify-self: center;
+    }
+
+    .cart-items-counter {
+        grid-row: 1;
+        grid-column: 1;
+        justify-self: center;
+        font-size: 40%;
+        font-weight: 800;
+        margin-bottom: 4.5px;
+        color: gold
+    }
+
+
+
+
+
+
+@media (max-width: 877px) {
+    .headercomponent {
+        grid-template-columns: 5% minmax(110px,20%) minmax(95px,20%) 10% 20% 20% 5%;
+        grid-template-rows: 50% 50%;
+    }
+
+    .search {
+        grid-row: 2;
+        grid-column: 1/-1;
+        margin: 0.5%;
+    }
+
+    .logo {
+        width: 60%;
+        _margin-top: 7px;
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 4%;
+    }
+}
+
+@media (max-width: 575px) {
+    .headercomponent {
+        grid-template-columns: 10% 25% 10% 27% 19% 9%;
+        gap: 0px;
+    }
+
+    .bi-layout-text-sidebar {
+        font-size: 160%;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .address > i {
+        display:none;
+    }
+
+    .theme-selector > i {
+        font-size: 100%;
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 6%;
+        padding-bottom: 6%;
+    }
+
+    .search {
+        margin: 0.9%;
+    }
+
+    .text-line-one {
+        font-size: 70%;
+    }
+
+    .text-line-two {
+        font-size: 75%;
+    }
+}
