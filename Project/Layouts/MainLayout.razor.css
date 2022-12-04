@@ -1,0 +1,33 @@
+﻿.mainlayout{
+    display: grid;
+    grid-template-columns: 15% 85%;
+    grid-template-rows: 10% auto 20%;
+    _background-color:red;
+    min-height: 100vh;
+    color: white;
+    font-size: 150%;
+}
+
+.header {
+    grid-row: 1;
+    grid-column: 1/-1;
+    background-color: rgba(48, 25, 52, 1);
+}
+
+.sidebar {
+    grid-row: 2;
+    grid-column: 1/2;
+    background-color: rgba(48, 25, 52, 0.75);
+}
+
+.pages {
+    grid-row: 2;
+    grid-column: 2/-1;
+    background-color: rgba(48, 25, 52, 0.50);
+}
+
+.footer {
+    grid-row: 3;
+    grid-column: 1/-1;
+    background-color: rgba(48, 25, 52, 0.25);
+}
