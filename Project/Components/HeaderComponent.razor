@@ -9,8 +9,15 @@
         <span class="text-line-two">Calle 123456</span>
     </div>
 
-    <div class="theme-selector">
-        <i class="bi bi-brightness-high active"></i>
+    <div class="theme-selector" @onclick="ThemeSelectorOnClick">
+        @if (IsLightModeActive == false)
+        {
+            <i class="bi bi-moon"></i>
+        }
+        else
+        {
+            <i class="bi bi-brightness-high"></i>
+        }
     </div>
 
     <div class="search">
@@ -43,6 +50,17 @@
 
 
 
+@*DarkModeCode-Start*@
 @code {
+    private bool IsLightModeActive;
 
+    [Parameter]
+    public EventCallback<bool> NotifyThemeStyle { get; set; }
+
+    private async void ThemeSelectorOnClick()
+    {
+        IsLightModeActive = !IsLightModeActive;
+        await NotifyThemeStyle.InvokeAsync(IsLightModeActive);
+    }
 }
+@*DarkModeCode-End*@

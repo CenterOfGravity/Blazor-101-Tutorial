@@ -1,16 +1,32 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="mainlayout">
-    <div class="header">
-        <HeaderComponent/>
+    <div class="header @ThemeStyleName">
+        <HeaderComponent NotifyThemeStyle="SetThemeStyle" />
     </div>
-    <div class="sidebar">
+
+    <div class="sidebar @ThemeStyleName">
         SIDEBAR
      </div>
-    <div class="pages">
+
+    <div class="pages @ThemeStyleName">
         @Body
     </div>
-    <div class="footer">
+
+    <div class="footer @ThemeStyleName">
         FOOTER
-        </div>
+     </div>
 </div>
+
+@*DarkModeCode-Start*@
+@code {
+    private string ThemeStyleName = string.Empty;
+
+    private void SetThemeStyle(bool IsLightModeActive)
+    {
+        if (IsLightModeActive == false)
+        { ThemeStyleName = string.Empty; }
+        else { ThemeStyleName = "light-mode"; }
+    }
+}
+@*DarkModeCode-End*@

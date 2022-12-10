@@ -1,3 +1,17 @@
+:root {
+    --color-background-header: rgba(26, 13, 28, 1);
+    --color-background-sidebar: rgba(26, 13, 28, 0.90);
+    --color-background-pages: rgba(26, 13, 28, 0.85);
+    --color-background-footer: rgba(26, 13, 28, 0.80);
+}
+
+.light-mode {
+    --color-background-header: rgba(58, 28, 64, 1);
+    --color-background-sidebar: rgba(58, 28, 64, 0.90);
+    --color-background-pages: rgba(58, 28, 64, 0.80);
+    --color-background-footer: rgba(58, 28, 64, 0.75);
+}
+
 body {
     margin: 0px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -35,3 +49,4 @@ h1:focus {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
