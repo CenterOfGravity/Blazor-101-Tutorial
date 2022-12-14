@@ -1,5 +1,6 @@
 ﻿<div class="headercomponent">
-    <i class="bi bi-layout-text-sidebar"></i>
+    <i class="bi bi-layout-text-sidebar" @onclick="SidebarIconOnClick"></i>
+
     <img class="logo"
          src="http://pngimg.com/uploads/amazon/amazon_PNG11.png" />
 
@@ -64,3 +65,14 @@
     }
 }
 @*DarkModeCode-End*@
+
+@code{
+
+    [Parameter]
+    public EventCallback NotifySidebarIconClicked { get; set; }
+
+    private async void SidebarIconOnClick()
+    {
+       await  NotifySidebarIconClicked.InvokeAsync();
+    }
+}

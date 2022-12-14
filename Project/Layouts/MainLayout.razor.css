@@ -1,6 +1,6 @@
 ﻿.mainlayout {
     display: grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: minmax(170px,15%) minmax(auto,85%);
     grid-template-rows: minmax(50px,4%) auto 20%;
     min-height: 100vh;
     color: white;
@@ -20,9 +20,15 @@
     background-color: var(--color-background-sidebar);
 }
 
-.pages {
+.pages-opened_sidebar {
     grid-row: 2;
     grid-column: 2/-1;
+    background-color: var(--color-background-pages);
+}
+
+.pages-closed_sidebar {
+    grid-row: 2;
+    grid-column: 1/-1;
     background-color: var(--color-background-pages);
 }
 
@@ -40,5 +46,15 @@
 
     .header {
         align-items: stretch;
+    }
+}
+
+@media (max-width: 575px) {
+    .pages-opened_sidebar, .pages-closed_sidebar {
+        grid-column: 1/-1;
+    }
+
+    .sidebar {
+        z-index: 1;
     }
 }

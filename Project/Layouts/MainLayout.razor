@@ -1,15 +1,18 @@
 ﻿@inherits LayoutComponentBase
+@inject IJSRuntime js
 
 <div class="mainlayout">
     <div class="header @ThemeStyleName">
-        <HeaderComponent NotifyThemeStyle="SetThemeStyle" />
+        <HeaderComponent NotifyThemeStyle="SetThemeStyle" NotifySidebarIconClicked="SetSidebarStatus" />
     </div>
+    @if (IsSidebarOpen)
+    {
+        <div class="sidebar @ThemeStyleName">
+            SIDEBAR
+         </div>
+    }
 
-    <div class="sidebar @ThemeStyleName">
-        SIDEBAR
-     </div>
-
-    <div class="pages @ThemeStyleName">
+    <div class="@PagesStyleName @ThemeStyleName">
         @Body
     </div>
 
@@ -30,3 +33,31 @@
     }
 }
 @*DarkModeCode-End*@
+
+
+@code{
+    private bool IsSidebarOpen = true;
+    private string PagesStyleName = "pages-opened_sidebar";
+    private void SetSidebarStatus()
+    {
+        if (IsSidebarOpen)
+        {
+            IsSidebarOpen = !IsSidebarOpen;
+            PagesStyleName = "pages-closed_sidebar";
+        }
+        else
+        {
+            IsSidebarOpen = !IsSidebarOpen;
+            PagesStyleName = "pages-opened_sidebar";
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        int width = await js.InvokeAsync<int>("width");
+        if(width <= 575)
+        {
+            IsSidebarOpen = false;
+        }
+    }
+}
