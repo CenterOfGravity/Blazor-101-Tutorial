@@ -1,4 +1,5 @@
-﻿<div class="headercomponent">
+﻿@inject NavigationManager NavigationManager
+<div class="headercomponent">
     <i class="bi bi-layout-text-sidebar" @onclick="SidebarIconOnClick"></i>
 
     <img class="logo"
@@ -32,7 +33,7 @@
         </button>
     </div>
 
-    <div class="sign-in">
+    <div class="sign-in" @onclick="GoToSignInPageOnClick">
         <span class="text-line-one">Hola Bienvenido</span>
         <span class="text-line-two">Inicia Sesion <i class="bi bi-caret-down-fill"></i></span>
     </div>
@@ -74,5 +75,12 @@
     private async void SidebarIconOnClick()
     {
        await  NotifySidebarIconClicked.InvokeAsync();
+    }
+}
+
+@code{
+    private void GoToSignInPageOnClick()
+    {
+        NavigationManager.NavigateTo("SignInPage");
     }
 }
