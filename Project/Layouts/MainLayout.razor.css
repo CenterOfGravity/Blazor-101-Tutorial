@@ -3,7 +3,6 @@
     grid-template-columns: minmax(170px,15%) minmax(auto,85%);
     grid-template-rows: minmax(50px,4%) auto 20%;
     min-height: 100vh;
-    color: white;
 }
 
 .header {
