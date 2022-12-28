@@ -1,0 +1,60 @@
+﻿@layout EmptyLayout
+@page "/SignUpPage"
+@inject NavigationManager NavigationManager
+
+<img class="logo"
+     src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png' />
+
+<div class='sign-up'>
+    <h2>Crear Cuenta</h2>
+
+    <EditForm Model="SignUpClassModel">
+        <DataAnnotationsValidator />
+        <ValidationMessage For="@(() => SignUpClassModel.Name)" />
+        <ValidationMessage For="@(() => SignUpClassModel.Email)" />
+        <ValidationMessage For="@(() => SignUpClassModel.Password)" />
+        <ValidationMessage For="@(() => SignUpClassModel.ConfirmPassword)" />
+
+        <label>Nombre:</label>
+        <InputText class="input-text" type='email' @bind-Value="SignUpClassModel.Name" />
+
+        <label>Correo:</label>
+        <InputText class="input-text" type='email' @bind-Value="SignUpClassModel.Email" />
+
+
+        <label>Contraseña:</label>
+        <InputText class="input-text" type='password' @bind-Value="SignUpClassModel.Password" />
+
+        <label>Confirmar Contraseña:</label>
+        <InputText class="input-text" type='password' @bind-Value="SignUpClassModel.ConfirmPassword" />
+
+        <input type='submit' value="Iniciar Sesión" />
+    </EditForm>
+
+
+    <p> Al continuar, aceptas las
+        <a> condiciones de uso</a> y 
+        <a>aviso de privacidad</a>.</p>
+
+    <div class="line"></div>
+
+    <div class="already_have_an_account">
+        ¿Tiene ya una cuenta?
+        <a style="text-decoration:underline" @onclick="GoToSignInPageOnClick">Inicia Sesión</a>
+    </div>
+
+</div>
+
+
+@code {
+    private SignUpClassModel SignUpClassModel = new SignUpClassModel();
+}
+
+@*SignInCode-Start*@
+@code {
+    private void GoToSignInPageOnClick()
+    {
+        NavigationManager.NavigateTo("SignInPage");
+    }
+}
+@*SignInCode-End*@

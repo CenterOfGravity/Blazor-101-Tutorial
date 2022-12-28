@@ -1,5 +1,7 @@
 ﻿@layout EmptyLayout
 @page "/SignInPage"
+@inject NavigationManager NavigationManager
+
 <img class="logo"
      src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png' />
 
@@ -46,10 +48,19 @@
     <div class="line">
         <h5>¿Usuario Nuevo?</h5>
     </div>
-    <button class='create-account-button'>Crea tu cuenta</button>
+    <button class='create-account-button' @onclick="GoToSignUpPageOnClick">Crea tu cuenta</button>
 </div>
 
 @code {
     private bool DoesEmailNeedVerification;
     private SignInClassModel SignInClassModel = new SignInClassModel();
 }
+
+@*SignUpCode-Start*@
+@code{
+    private void GoToSignUpPageOnClick()
+    {
+        NavigationManager.NavigateTo("SignUpPage");
+    }
+}
+@*SignUpCode-End*@
