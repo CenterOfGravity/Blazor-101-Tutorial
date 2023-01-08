@@ -26,6 +26,48 @@
             return window.innerWidth;
         };
     </script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBweY0K13TldzPKvvXGB6CQQoOCxq-vYBc",
+            authDomain: "project-18395.firebaseapp.com",
+            projectId: "project-18395",
+            storageBucket: "project-18395.appspot.com",
+            messagingSenderId: "729063269694",
+            appId: "1:729063269694:web:e6b5b4141d6e319142386f"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // Initialize Firebase Authentication and get a reference to the service
+        const auth = getAuth(app);
+        window.CreateUserWithEmailAndPassword = async function(email, password)
+        {
+            var IsSignedIn = false;
+            await createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    IsSignedIn = true;
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    IsSignedIn = false;
+                    // ..
+                });
+            return IsSignedIn;
+        }
+    </script>
 </body>
 
 </html>

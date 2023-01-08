@@ -1,0 +1,80 @@
+﻿.logo {
+    width: 150px;
+}
+
+.email-verification {
+    width: 315px;
+    border-radius: 5px;
+    border: 1px solid;
+    padding: 0px 20px 20px 20px;
+    background-color: var(--color-background-header);
+}
+
+a {
+    cursor: pointer;
+    color: #0066c0;
+    font-style: oblique;
+}
+
+    a:hover {
+        color: purple;
+        text-decoration: underline;
+    }
+
+
+
+.ir-pagina-principal {
+    margin-top: -25px;
+    cursor: pointer;
+}
+
+    .ir-pagina-principal:hover {
+        text-decoration: underline;
+    }
+
+.cambiar-correo {
+    width: 315px;
+}
+
+.line {
+    text-align: center;
+    position: relative;
+}
+
+    .line::before {
+        content: "";
+        width: 100%;
+        display: block;
+        border-top: 1px solid #e7e7e7;
+        position: absolute;
+        top: 50%;
+    }
+
+    .line > h5 {
+        font-size: 80%;
+        color: #767676;
+        font-weight: 400;
+        position: relative;
+        display: inline-block;
+        background-color: #fff;
+        padding: 0 8px 0 8px;
+    }
+
+label {
+    display: inline-block;
+    margin-top: 3.5%;
+}
+
+::deep .input-text {
+    width: 97.5%;
+    height: 22px;
+}
+
+input {
+    border-radius: 3px;
+    width: 315px;
+    height: 28px;
+    border: 1px solid;
+    background-color: lightgray;
+    margin-top: 3.5%;
+}

@@ -1,6 +1,7 @@
 ﻿@layout EmptyLayout
 @page "/SignUpPage"
 @inject NavigationManager NavigationManager
+@inject IJSRuntime js
 
 <img class="logo"
      src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png' />
@@ -8,7 +9,7 @@
 <div class='sign-up'>
     <h2>Crear Cuenta</h2>
 
-    <EditForm Model="SignUpClassModel">
+    <EditForm Model="SignUpClassModel" OnValidSubmit="SignUpOnValidSubmit">
         <DataAnnotationsValidator />
         <ValidationMessage For="@(() => SignUpClassModel.Name)" />
         <ValidationMessage For="@(() => SignUpClassModel.Email)" />
@@ -16,7 +17,7 @@
         <ValidationMessage For="@(() => SignUpClassModel.ConfirmPassword)" />
 
         <label>Nombre:</label>
-        <InputText class="input-text" type='email' @bind-Value="SignUpClassModel.Name" />
+        <InputText class="input-text" type='text' @bind-Value="SignUpClassModel.Name" />
 
         <label>Correo:</label>
         <InputText class="input-text" type='email' @bind-Value="SignUpClassModel.Email" />
@@ -28,7 +29,7 @@
         <label>Confirmar Contraseña:</label>
         <InputText class="input-text" type='password' @bind-Value="SignUpClassModel.ConfirmPassword" />
 
-        <input type='submit' value="Iniciar Sesión" />
+        <input disabled="@IsSignUpButtonDisabled" type='submit' value="Verificar correo electrónico" />
     </EditForm>
 
 
@@ -46,10 +47,6 @@
 </div>
 
 
-@code {
-    private SignUpClassModel SignUpClassModel = new SignUpClassModel();
-}
-
 @*SignInCode-Start*@
 @code {
     private void GoToSignInPageOnClick()
@@ -58,3 +55,22 @@
     }
 }
 @*SignInCode-End*@
+
+
+@*SignUpCode-Start*@
+@code {
+    private SignUpClassModel SignUpClassModel = new SignUpClassModel();
+    private bool IsSignUpButtonDisabled;
+    private async void SignUpOnValidSubmit()
+    {
+        IsSignUpButtonDisabled = true;
+        if ( await js.InvokeAsync<bool>("CreateUserWithEmailAndPassword", SignUpClassModel.Email, SignUpClassModel.Password))
+        {
+            NavigationManager.NavigateTo($"EmailVerificationPage/{SignUpClassModel.Email}");
+        }
+        SignUpClassModel.Password = string.Empty;
+        SignUpClassModel.ConfirmPassword= string.Empty;
+        IsSignUpButtonDisabled = false;
+    }
+}
+@*SignUpCode-End*@

@@ -1,0 +1,64 @@
+﻿@layout EmptyLayout
+@page "/EmailVerificationPage/{Email}"
+@using System.ComponentModel.DataAnnotations;
+
+<img class="logo"
+     src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png' />
+
+<div class='email-verification'>
+    <h2>Verifica Tu Correo</h2>
+
+    <p>
+        Para verificar su correo, le hemos enviado  un correo de verificación a: 
+        @Email<a @onclick="ShowChangeEmailContainerOnClick">(cambiar correo)</a>
+    </p>
+
+    <a  class="resent-email">(volver a enviar correo de verificación)</a>
+
+</div>
+
+<div class='ir-pagina-principal'>Ir a página principal</div>
+
+@if (IsChangeEmailContainerVisible)
+{
+    <div class='cambiar-correo'>
+        <div class="line">
+            <h5>Cambiar Correo</h5>
+        </div>
+
+        <EditForm Model="_EmailVerificationClassModel">
+            <DataAnnotationsValidator />
+
+            <label>Correo Nuevo:</label>
+            <InputText type='email' class="input-text" @bind-Value="_EmailVerificationClassModel.Email" />
+            <ValidationMessage For="@(() => _EmailVerificationClassModel.Email)" />
+
+            <input type='submit' value="Confirmar nuevo correo" />
+        </EditForm>
+    </div>
+}
+
+@*ChangeEmailCode-Start*@
+@code {
+    private bool IsChangeEmailContainerVisible;
+
+    private void ShowChangeEmailContainerOnClick()
+    {
+        IsChangeEmailContainerVisible = !IsChangeEmailContainerVisible;
+    }
+
+    private class EmailVerificationClassModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+    }
+
+    private EmailVerificationClassModel _EmailVerificationClassModel = new EmailVerificationClassModel();
+}
+@*ChangeEmailCode-End*@
+
+@code{
+    [Parameter]
+    public string Email { get; set; } = string.Empty;
+}
