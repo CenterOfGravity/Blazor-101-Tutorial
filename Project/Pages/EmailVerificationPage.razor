@@ -26,12 +26,12 @@
             <h5>Cambiar Correo</h5>
         </div>
 
-        <EditForm Model="_EmailVerificationClassModel">
+        <EditForm Model="emailVerificationClassModel">
             <DataAnnotationsValidator />
 
             <label>Correo Nuevo:</label>
-            <InputText type='email' class="input-text" @bind-Value="_EmailVerificationClassModel.Email" />
-            <ValidationMessage For="@(() => _EmailVerificationClassModel.Email)" />
+            <InputText type='email' class="input-text" @bind-Value="emailVerificationClassModel.Email" />
+            <ValidationMessage For="@(() => emailVerificationClassModel.Email)" />
 
             <input type='submit' value="Confirmar nuevo correo" />
         </EditForm>
@@ -54,7 +54,7 @@
         public string Email { get; set; }
     }
 
-    private EmailVerificationClassModel _EmailVerificationClassModel = new EmailVerificationClassModel();
+    private EmailVerificationClassModel emailVerificationClassModel = new EmailVerificationClassModel();
 }
 @*ChangeEmailCode-End*@
 
