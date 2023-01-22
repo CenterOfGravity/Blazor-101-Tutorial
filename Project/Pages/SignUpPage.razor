@@ -66,6 +66,7 @@
         IsSignUpButtonDisabled = true;
         if ( await js.InvokeAsync<bool>("CreateUserWithEmailAndPassword", SignUpClassModel.Email, SignUpClassModel.Password))
         {
+            await js.InvokeVoidAsync("SendEmailVerification", false); 
             NavigationManager.NavigateTo($"EmailVerificationPage/{SignUpClassModel.Email}");
         }
         SignUpClassModel.Password = string.Empty;

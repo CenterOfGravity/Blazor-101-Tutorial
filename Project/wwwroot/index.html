@@ -30,7 +30,7 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -49,6 +49,11 @@
 
         // Initialize Firebase Authentication and get a reference to the service
         const auth = getAuth(app);
+
+        var actionCodeSettings = {
+            url: 'https://localhost:7152/'
+        };
+
         window.CreateUserWithEmailAndPassword = async function(email, password)
         {
             var IsSignedIn = false;
@@ -67,6 +72,21 @@
                 });
             password = "";
             return IsSignedIn;
+        }
+
+        window.SendEmailVerification = async function (ShouldSendAlert) {
+            await sendEmailVerification(auth.currentUser, actionCodeSettings)
+                .then(() => {
+                    // Email verification sent!
+                    // ...
+                    if (ShouldSendAlert) {
+                        alert("Verification email sent");
+                    }
+                }).catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // ..
+                });
         }
     </script>
 </body>

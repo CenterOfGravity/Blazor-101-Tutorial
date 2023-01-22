@@ -1,5 +1,6 @@
 ﻿@layout EmptyLayout
 @page "/EmailVerificationPage/{Email}"
+@inject IJSRuntime js
 @using System.ComponentModel.DataAnnotations;
 
 <img class="logo"
@@ -13,7 +14,7 @@
         @Email<a @onclick="ShowChangeEmailContainerOnClick">(cambiar correo)</a>
     </p>
 
-    <a  class="resent-email">(volver a enviar correo de verificación)</a>
+    <a class="resent-email" @onclick="ReSendEmailVerificationOnClick">(volver a enviar correo de verificación)</a>
 
 </div>
 
@@ -62,3 +63,12 @@
     [Parameter]
     public string Email { get; set; } = string.Empty;
 }
+
+@*ReSendEmailVerification-Start*@
+@code {
+    private async void ReSendEmailVerificationOnClick()
+    {
+        await js.InvokeVoidAsync("SendEmailVerification", true);
+    }
+}
+@*ReSendEmailVerification-End*@
