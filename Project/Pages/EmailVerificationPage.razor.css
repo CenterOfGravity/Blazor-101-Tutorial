@@ -13,7 +13,6 @@
 a {
     cursor: pointer;
     color: #0066c0;
-    font-style: oblique;
 }
 
     a:hover {
@@ -21,6 +20,21 @@ a {
         text-decoration: underline;
     }
 
+.email-verification > div {
+    color: red;
+    font-size: 75%;
+    font-style: oblique;
+}
+
+.resent-email-blocked-style {
+    cursor: unset;
+    color: gray;
+}
+
+    .resent-email-blocked-style:hover {
+        text-decoration: none;
+        color: gray;
+    }
 
 
 .ir-pagina-principal {

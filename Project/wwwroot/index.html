@@ -25,6 +25,18 @@
         width = function () {
             return window.innerWidth;
         };
+
+        LocalStorageSetItem = (key, item) => {
+            window.localStorage.setItem(key, item);
+        };
+
+        LocalStorageGetItem = (key) => {
+            return window.localStorage.getItem(key);
+        };
+
+        LocalStorageRemoveItem = (key) => {
+            window.localStorage.removeItem(key);
+        };
     </script>
 
     <script type="module">
@@ -67,6 +79,7 @@
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    alert(errorMessage);
                     IsSignedIn = false;
                     // ..
                 });
@@ -85,6 +98,7 @@
                 }).catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    alert(errorMessage);
                     // ..
                 });
         }

@@ -1,7 +1,9 @@
 ﻿@layout EmptyLayout
 @page "/EmailVerificationPage/{Email}"
 @inject IJSRuntime js
+@implements IDisposable
 @using System.ComponentModel.DataAnnotations;
+
 
 <img class="logo"
      src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png' />
@@ -10,11 +12,16 @@
     <h2>Verifica Tu Correo</h2>
 
     <p>
-        Para verificar su correo, le hemos enviado  un correo de verificación a: 
+        Para verificar su correo, le hemos enviado  un correo de verificación a:
         @Email<a @onclick="ShowChangeEmailContainerOnClick">(cambiar correo)</a>
     </p>
 
-    <a class="resent-email" @onclick="ReSendEmailVerificationOnClick">(volver a enviar correo de verificación)</a>
+    <a class="@ResentEmailCssClass" @onclick="ReSendEmailVerificationOnClick">Volver a enviar correo de verificación</a>
+    @if (Seconds != 61)
+    {
+        <div> (@Seconds segundos)</div>
+    }
+
 
 </div>
 
@@ -59,16 +66,83 @@
 }
 @*ChangeEmailCode-End*@
 
-@code{
+@code {
     [Parameter]
     public string Email { get; set; } = string.Empty;
 }
 
+
 @*ReSendEmailVerification-Start*@
+@using System.Timers;
 @code {
+    private Timer Timer = new Timer(1000);
+    private int Seconds = 61;
+    private string ResentEmailCssClass = string.Empty;
+
     private async void ReSendEmailVerificationOnClick()
     {
-        await js.InvokeVoidAsync("SendEmailVerification", true);
+        if (Timer.Enabled == false)
+        {
+            await GetSecondsFromLocalStorage(false);
+            await js.InvokeAsync<string>("SendEmailVerification", true);
+        }
+    }
+
+    private async void TimerEvent(Object source, ElapsedEventArgs e)
+    {
+        Seconds = Seconds - 1;
+        await js.InvokeVoidAsync("LocalStorageSetItem", "ResentEmailSeconds", Seconds);
+        if (Seconds <= 0)
+        {
+            Seconds = 61;
+            await js.InvokeVoidAsync("LocalStorageRemoveItem", "ResentEmailSeconds");
+            ResentEmailCssClass = string.Empty;
+            Timer.Enabled = false;
+        }
+        StateHasChanged();
+    }
+
+    private async Task GetSecondsFromLocalStorage(bool IsFromOnInitializedAsync)
+    {
+        string? LocalStorageSeconds = await js.InvokeAsync<string>("LocalStorageGetItem", "ResentEmailSeconds");
+        if (!string.IsNullOrEmpty(LocalStorageSeconds))
+        {
+            int ParsedSeconds = Int32.Parse(LocalStorageSeconds);
+            if (ParsedSeconds < 61 && ParsedSeconds > 0)
+            {
+                Seconds = ParsedSeconds;
+
+                if (IsFromOnInitializedAsync == true)
+                {
+                    ResentEmailCssClass = "resent-email-blocked-style";
+                    Timer.Enabled = true;
+                }
+            }
+        }
+
+        if (IsFromOnInitializedAsync == false)
+        {
+            Timer.Enabled = true;
+            ResentEmailCssClass = "resent-email-blocked-style";
+        }
+
     }
 }
 @*ReSendEmailVerification-End*@
+
+
+
+@*ComponentLifeCycleMethods-Start*@
+@code {
+    protected async override Task OnInitializedAsync()
+    {
+        Timer.Elapsed += TimerEvent;
+        await GetSecondsFromLocalStorage(true);
+    }
+
+    public void Dispose()
+    {
+        Timer?.Dispose();
+    }
+}
+@*ComponentLifeCycleMethods-Start*@
