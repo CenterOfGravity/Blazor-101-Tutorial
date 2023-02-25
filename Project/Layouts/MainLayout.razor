@@ -35,6 +35,7 @@
 @*DarkModeCode-End*@
 
 
+@*SidebarCode-Start*@
 @code{
     private bool IsSidebarOpen = true;
     private string PagesStyleName = "pages-opened_sidebar";
@@ -51,13 +52,21 @@
             PagesStyleName = "pages-opened_sidebar";
         }
     }
+}
+@*SidebarCode-End*@
 
+
+@*LifeCycleEvents-Start*@
+@code{
     protected override async Task OnInitializedAsync()
     {
+        //SidebarCode-Start
         int width = await js.InvokeAsync<int>("width");
-        if(width <= 575)
+        if (width <= 575)
         {
             IsSidebarOpen = false;
         }
+        //SidebarCode-End
     }
 }
+@*LifeCycleEvents-End*@
