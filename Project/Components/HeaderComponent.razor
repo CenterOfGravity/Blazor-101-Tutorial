@@ -1,4 +1,6 @@
 ﻿@inject NavigationManager NavigationManager
+@inject IJSRuntime js
+
 <div class="headercomponent">
     <i class="bi bi-layout-text-sidebar" @onclick="SidebarIconOnClick"></i>
 
@@ -34,7 +36,7 @@
     </div>
 
     <div class="sign-in" @onclick="GoToSignInPageOnClick">
-        <span class="text-line-one">Hola Bienvenido</span>
+        <span class="text-line-one">@(string.IsNullOrEmpty(Email) ? "Hola Bienvenido" : "Hola " +Email)</span>
         <span class="text-line-two">Inicia Sesion <i class="bi bi-caret-down-fill"></i></span>
     </div>
 
@@ -49,7 +51,6 @@
     </div>
 
 </div>
-
 
 
 @*DarkModeCode-Start*@
@@ -67,6 +68,8 @@
 }
 @*DarkModeCode-End*@
 
+
+@*SidebarCode-Start*@
 @code{
 
     [Parameter]
@@ -77,10 +80,27 @@
        await  NotifySidebarIconClicked.InvokeAsync();
     }
 }
+@*SidebarCode-End*@
 
+
+
+@*SignInCode-Start*@
 @code{
     private void GoToSignInPageOnClick()
     {
         NavigationManager.NavigateTo("SignInPage");
     }
 }
+@*SignInCode-End*@
+
+
+@*LifeCycleEvents-Start*@
+@code {
+    private string Email = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Email = await js.InvokeAsync<string>("OnAuthStateChanged");
+    }
+}
+@*LifeCycleEvents-End*@

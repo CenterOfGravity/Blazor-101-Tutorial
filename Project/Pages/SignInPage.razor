@@ -1,6 +1,7 @@
 ﻿@layout EmptyLayout
 @page "/SignInPage"
 @inject NavigationManager NavigationManager
+@inject IJSRuntime js
 
 <img class="logo"
      src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png' />
@@ -8,7 +9,7 @@
 <div class='sign-in'>
     <h2>Iniciar Sesión.</h2>
 
-    <EditForm Model="SignInClassModel">
+    <EditForm Model="SignInClassModel" OnValidSubmit="SignInOnValidSubmit">
         <DataAnnotationsValidator />
         <ValidationMessage For="@(() => SignInClassModel.Email)" />
         <ValidationMessage For="@(() => SignInClassModel.Password)" />
@@ -23,7 +24,7 @@
         <input type='submit' value="Iniciar Sesión" />
     </EditForm>
 
-    @if (!DoesEmailNeedVerification)
+    @if (DoesEmailNeedVerification)
     {
         <p class="verification_warning">
             Para Iniciar Sesión, verifique su cuenta:
@@ -64,3 +65,28 @@
     }
 }
 @*SignUpCode-End*@
+
+
+
+
+
+@*SignInCode-Start*@
+@code {
+    private async void SignInOnValidSubmit()
+    {
+        // array[IsSignedIn --> [0], IsEmailVerified --> [1]]
+        bool[] array = await js.InvokeAsync<bool[]>("SignInWithEmailAndPassword", SignInClassModel.Email, SignInClassModel.Password);
+
+        if (array[0] && array[1])
+        {
+            SignInClassModel.Password = string.Empty;
+            NavigationManager.NavigateTo("/");
+        }
+
+        if (!array[1])
+        {
+            DoesEmailNeedVerification = true;
+        }
+    }
+}
+@*SignInCode-End*@

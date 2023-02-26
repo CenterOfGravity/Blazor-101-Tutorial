@@ -42,7 +42,7 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -102,6 +102,45 @@
                     // ..
                 });
         }
+
+        window.SignInWithEmailAndPassword = async function (email, password) {
+            // array[IsSignedIn --> [0], IsEmailVerified --> [1]]
+            let array = [false, false];
+            await signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    array[0] = true;
+                    array[1] = user.emailVerified;
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    array[0] = false;
+                    alert(errorMessage);
+                });
+            return array
+        }
+
+        window.OnAuthStateChanged = async function () {
+            let email;
+            await onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is signed in, see docs for a list of available properties
+                    // https://firebase.google.com/docs/reference/js/firebase.User
+                    const uid = user.uid;
+                    email = user.email
+                    // ...
+                } else {
+                    // User is signed out
+                    // ...
+                    email = "";
+                }
+            });
+            return email
+        }
+
     </script>
 </body>
 
