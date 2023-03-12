@@ -36,7 +36,7 @@
     </div>
 
     <div class="sign-in" @onclick="GoToSignInPageOnClick">
-        <span class="text-line-one">@(string.IsNullOrEmpty(Email) ? "Hola Bienvenido" : "Hola " +Email)</span>
+        <span class="text-line-one">@(string.IsNullOrEmpty(Name) ? "Hola Bienvenido" : "Hola " +Name)</span>
         <span class="text-line-two">Inicia Sesion <i class="bi bi-caret-down-fill"></i></span>
     </div>
 
@@ -96,11 +96,11 @@
 
 @*LifeCycleEvents-Start*@
 @code {
-    private string Email = string.Empty;
+    private string Name = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        Email = await js.InvokeAsync<string>("OnAuthStateChanged");
+        Name = await js.InvokeAsync<string>("OnAuthStateChanged");
     }
 }
 @*LifeCycleEvents-End*@

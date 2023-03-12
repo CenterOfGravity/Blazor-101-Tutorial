@@ -112,7 +112,9 @@
     .sign-in > .text-line-one, .return-orders > .text-line-one {
         grid-row: 1;
         align-self:center;
-        justify-self:center;
+        justify-self:stretch;
+        overflow:hidden;
+        text-align: center;
     }
 
     .sign-in > .text-line-two, .return-orders > .text-line-two {
