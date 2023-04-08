@@ -103,6 +103,16 @@ a, .forgot-your-password {
         padding: 0 8px 0 8px;
     }
 
+.remember-me > input {
+    width: auto;
+    vertical-align: middle;
+    height: auto;
+}
+
+.remember-me > span {
+    font-size: 75%;
+    user-select: none;
+}
 
 .create-account-button {
     border-radius: 3px;

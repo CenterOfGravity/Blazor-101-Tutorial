@@ -96,11 +96,30 @@
 
 @*LifeCycleEvents-Start*@
 @code {
+    private DotNetObjectReference<HeaderComponent>? ObjRef;
     private string Name = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        Name = await js.InvokeAsync<string>("OnAuthStateChanged");
+        //OnAuthStateChangedCode-Start
+        if (string.IsNullOrEmpty(Name))
+        {
+            ObjRef = DotNetObjectReference.Create(this);
+            Console.WriteLine("OnInitializedAsync :" + Name);
+            await js.InvokeVoidAsync("OnAuthStateChanged", ObjRef);
+        }
+        //OnAuthStateChangedCode-End
+    }
+
+    [JSInvokable("JSInvokableOnAuthStateChanged")]
+    public void JSInvokableOnAuthStateChanged(string name)
+    {
+        if (!string.IsNullOrEmpty(name))
+        {
+            Name = name;
+            Console.WriteLine("JSInvokableOnAuthStateChanged :" + Name);
+            StateHasChanged();
+        }
     }
 }
 @*LifeCycleEvents-End*@
