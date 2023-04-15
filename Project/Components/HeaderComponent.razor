@@ -1,6 +1,6 @@
 ﻿@inject NavigationManager NavigationManager
-@inject IJSRuntime js
-
+@inject FirebaseAuthStates FirebaseAuthStates
+@implements IDisposable
 <div class="headercomponent">
     <i class="bi bi-layout-text-sidebar" @onclick="SidebarIconOnClick"></i>
 
@@ -36,7 +36,7 @@
     </div>
 
     <div class="sign-in" @onclick="GoToSignInPageOnClick">
-        <span class="text-line-one">@(string.IsNullOrEmpty(Name) ? "Hola Bienvenido" : "Hola " +Name)</span>
+        <span class="text-line-one">@(string.IsNullOrEmpty(FirebaseAuthStates.Name) ? "Hola Bienvenido" : "Hola " + FirebaseAuthStates.Name)</span>
         <span class="text-line-two">Inicia Sesion <i class="bi bi-caret-down-fill"></i></span>
     </div>
 
@@ -96,30 +96,21 @@
 
 @*LifeCycleEvents-Start*@
 @code {
-    private DotNetObjectReference<HeaderComponent>? ObjRef;
-    private string Name = string.Empty;
-
     protected override async Task OnInitializedAsync()
     {
         //OnAuthStateChangedCode-Start
-        if (string.IsNullOrEmpty(Name))
+        if (string.IsNullOrEmpty(FirebaseAuthStates.Name))
         {
-            ObjRef = DotNetObjectReference.Create(this);
-            Console.WriteLine("OnInitializedAsync :" + Name);
-            await js.InvokeVoidAsync("OnAuthStateChanged", ObjRef);
+            FirebaseAuthStates.OnChange += StateHasChanged;
+            Console.WriteLine("OnInitializedAsyn: " + FirebaseAuthStates.Name);
+            await FirebaseAuthStates.OnAuthStateChanged();
         }
         //OnAuthStateChangedCode-End
     }
 
-    [JSInvokable("JSInvokableOnAuthStateChanged")]
-    public void JSInvokableOnAuthStateChanged(string name)
+    public void Dispose()
     {
-        if (!string.IsNullOrEmpty(name))
-        {
-            Name = name;
-            Console.WriteLine("JSInvokableOnAuthStateChanged :" + Name);
-            StateHasChanged();
-        }
+        FirebaseAuthStates.Dispose();
     }
 }
 @*LifeCycleEvents-End*@
