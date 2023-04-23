@@ -23,12 +23,16 @@
     grid-row: 2;
     grid-column: 2/-1;
     background-color: var(--color-background-pages);
+    padding-left: 1.0%;
+    padding-right: 1.0%;
 }
 
 .pages-closed_sidebar {
     grid-row: 2;
     grid-column: 1/-1;
     background-color: var(--color-background-pages);
+    padding-left: 1.0%;
+    padding-right: 1.0%;
 }
 
 .footer {

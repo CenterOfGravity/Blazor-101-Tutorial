@@ -1,0 +1,31 @@
+﻿<div class="product-card">
+    <span class="badge-discount">Oferta</span>
+
+   <a class="img" style="background-image: url(@ImgUrl);">
+        <span class="brand">Nautica</span>
+    </a>
+
+    <a class="title" >
+        Nautica Voyage por Nautica para Hombres. Spray Eau de Toilette
+    </a>
+
+    <a class="price">
+        <span class="price-symbol">US$</span>
+        <span class="price-whole">12</span>
+        <span class="price-fraction">00</span>
+        <span class="discount-porcentage">(-50%)</span>
+        <span class="original-price">US$ 24.00</span>
+    </a>
+
+
+    <a class="sizes">
+        <span class="size">3.3 Ounce</span>
+        <span class="size">[4.3 Ounce,</span>
+        <span class="size">5.3 Ounce]</span>
+    </a>
+</div>
+
+@code {
+    [Parameter]
+    public string ImgUrl { get; set; } = string.Empty;
+}

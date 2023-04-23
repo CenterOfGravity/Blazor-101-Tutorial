@@ -1,0 +1,45 @@
+﻿.sub-title {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    align-items: center;
+}
+
+h1 {
+    margin: 2.5% 0%;
+}
+
+.button {
+    display: grid;
+    grid-template-columns: 60% 30%;
+    align-items: center;
+    gap: 10%;
+    height: 45px;
+    padding: 0 0 0 10%;
+    background: #009578;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-self: end;
+    color: white;
+}
+
+    .button > i {
+        font-size: 1.5em;
+        background: rgba(0, 0, 0, 0.08);
+        line-height: 45px;
+    }
+
+    .button:hover {
+        background: #008168;
+    }
+
+span {
+    color: rgba(52,131,250,1);
+    justify-self: end;
+}
+
+    span:hover {
+        text-decoration: underline;
+    }
+
+
