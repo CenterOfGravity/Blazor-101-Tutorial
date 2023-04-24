@@ -42,4 +42,10 @@ span {
         text-decoration: underline;
     }
 
+::deep .product-card {
+    height: 325px;
+    min-width: 180px;
+    max-width: 260px;
+    cursor: pointer;
+}
 

@@ -6,12 +6,6 @@
     position: relative;
 }
 
-.product-card {
-    height: 325px;
-    min-width: 180px;
-    max-width: 260px;
-    cursor: pointer;
-}
 
 .badge-discount {
     position: absolute;
