@@ -37,6 +37,22 @@
         LocalStorageRemoveItem = (key) => {
             window.localStorage.removeItem(key);
         };
+
+        GetScrollLeft = (id) => {
+            return document.getElementById(id).scrollLeft
+        };
+
+        SetScrollLeft = (id, value) => {
+            document.getElementById(id).scrollLeft = value;
+        };
+
+        ElementClientWidth = (id) => {
+            return document.getElementById(id).clientWidth;
+        };
+
+        ElementScrollWidth = (id) => {
+            return document.getElementById(id).scrollWidth;
+        };
     </script>
 
     <script type="module">

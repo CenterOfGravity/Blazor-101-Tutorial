@@ -47,5 +47,6 @@ span {
     min-width: 180px;
     max-width: 260px;
     cursor: pointer;
+    scroll-snap-align: start;
 }
 

@@ -1,0 +1,117 @@
+﻿.container {
+    position: relative;
+    padding: 0px 1%;
+    width: auto;
+
+    container-type: inline-size;
+    container-name: container;
+}
+
+    .container > i {
+        position: absolute;
+        top: 40%;
+        z-index: 1;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        background-color: white;
+        color: black;
+        box-shadow: 0 6px 4px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bolder;
+    }
+
+        .container > i:first-child {
+            left: -8px;
+            visibility: hidden;
+        }
+
+        .container > i:last-child {
+            right: -8px;
+            visibility: hidden;
+        }
+
+        .container > i:hover {
+            background-color: gray;
+        }
+
+
+.carousel {
+    display: grid;
+    grid-auto-columns: calc(92.2%/7);
+    grid-auto-flow: column;
+    gap: 0.8%;
+    user-select: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.SnapTypeCssClassName {
+    scroll-snap-type: inline mandatory;
+}
+
+@container container (max-width: 1375px) {
+    .carousel {
+        grid-auto-columns: calc(93%/6);
+    }
+}
+
+@container container (max-width: 1175px) {
+    .carousel {
+        grid-auto-columns: calc(93.8%/5);
+    }
+}
+
+@container container (max-width: 975px) {
+    .carousel {
+        grid-auto-columns: calc(94.6%/4);
+    }
+}
+
+@container container (max-width: 775px) {
+    .carousel {
+        grid-auto-columns: calc(93.4%/3);
+    }
+}
+
+@container container (max-width: 590px) {
+    .carousel {
+        grid-auto-columns: calc(98.4%/3);
+    }
+}
+
+@container container (max-width: 570px) {
+    .carousel {
+        grid-auto-columns: calc(86.4%/2);
+        scroll-snap-type: inline proximity;
+        scroll-behavior: smooth;
+    }
+}
+
+@container container (max-width: 475px) {
+    .carousel {
+        grid-auto-columns: calc(98.4%/2);
+    }
+}
+
+@container container (max-width: 390px) {
+    .carousel {
+        grid-auto-columns: calc(80%/1);
+        gap: 2%;
+    }
+}
+
+@container container (max-width: 310px) {
+    .carousel {
+        grid-auto-columns: 100%;
+        gap: 0px;
+    }
+
+    ::deep .product-card {
+        max-width: none;
+    }
+}
+
