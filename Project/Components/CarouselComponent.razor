@@ -1,6 +1,6 @@
 ﻿@inject IJSRuntime js
 
-<div class="container" @onmouseleave="OnMouseLeave" @onmouseenter="OnMouseEnter">
+<div class="container" @onmouseleave="OnMouseLeave" >
     <i class="bi bi-chevron-left" style="@LeftArrowCssCode" @onclick="@(() => ArrowOnClick("Left"))"></i>
     <div id="@carousel" class="carousel @SnapTypeCssClassName"
          @onmousedown="OnMouseDown" @onmousemove="OnMouseMove" @onmouseup="OnMouseUp"
@@ -117,10 +117,20 @@
         LeftArrowCssCode = CurrentScrollPosition == 0 ? "visibility:hidden" : "visibility:visible";
         RightArrowCssCode = Math.Abs(CurrentScrollPosition - MaxScrollPosition) < 2 ? "visibility:hidden" : "visibility:visible";
     }   
-    
-    public async Task OnMouseEnter()
-    {
-        await HideOrShowArrrowIcons();
-    }
 }
     @*CarouselCode-End*@
+
+@*LifeCycleEnds-Start*@
+@code{
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // CarouselCode - Start
+            await HideOrShowArrrowIcons();
+            StateHasChanged();
+            // CarouselCode - End
+        }
+    }
+}
+@*LifeCycleEnds-Start*@
