@@ -1,11 +1,13 @@
-﻿<div class="product-card">
+﻿@inject IJSRuntime js;
+
+<div @ref="ProductCardRef" class="product-card">
     <span class="badge-discount">Oferta</span>
 
    <a class="img" style="background-image: url(@ImgUrl);">
         <span class="brand">Nautica</span>
     </a>
 
-    <a class="title" >
+    <a class="title" @onmouseenter="MouseEnter" @onmouseleave="MouseLeave">
         Nautica Voyage por Nautica para Hombres. Spray Eau de Toilette
     </a>
 
@@ -25,7 +27,54 @@
     </a>
 </div>
 
+@if (IsHiddenTitleVisible)
+{
+    <div style="top:@PositionY; left:@PositionX" class="hidden-title">Nautica Voyage por Nautica para Hombres. Spray Eau de Toilette</div>
+}
+
+@*HideOrShownHiddenTitle-CodeStart*@
+@code {
+    private bool IsHiddenTitleVisible;
+    private string PositionX = "0px";
+    private string PositionY = "0px";
+    private ElementReference ProductCardRef;
+    private bool HasMouseLeaved;
+
+    private async Task MouseEnter(MouseEventArgs e)
+    {
+        await Task.Delay(500);
+        if(!HasMouseLeaved)
+        {
+            IsHiddenTitleVisible = true;
+
+            var ProductCardOffSetLeft = await js.InvokeAsync<double>("ElementoOffSetLeft", ProductCardRef);
+            PositionX = (ProductCardOffSetLeft + e.OffsetX - CurrentScrollPosition).ToString() + "px";
+            PositionY = (221 + e.OffsetY).ToString() + "px";
+        }
+        else
+        {
+            HasMouseLeaved = false;
+        }
+    }
+
+    private async Task MouseLeave(MouseEventArgs e)
+    {
+
+        if (!IsHiddenTitleVisible)
+        {
+            HasMouseLeaved = true;
+        }
+
+        IsHiddenTitleVisible = false;
+    }
+}
+    @*HideOrShownHiddenTitle-CodeEnd*@
+
 @code {
     [Parameter]
     public string ImgUrl { get; set; } = string.Empty;
+
+    [Parameter]
+    public double CurrentScrollPosition { get; set; } = 0;
+
 }

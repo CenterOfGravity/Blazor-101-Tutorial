@@ -6,7 +6,6 @@
     position: relative;
 }
 
-
 .badge-discount {
     position: absolute;
     background: #FF3333;
@@ -47,6 +46,17 @@
     margin-left: 1.5%;
     _margin-right: 1.5%;
     align-self: center;
+}
+
+.hidden-title {
+    position: absolute;
+    background-color: antiquewhite;
+    border: 1px solid white;
+    width: auto;
+    color: black;
+    font-size: 145%;
+    z-index: 1;
+    padding: 5px;
 }
 
 
