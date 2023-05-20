@@ -1,6 +1,8 @@
 ﻿@inject IJSRuntime js;
+@inject NavigationManager NavigationManager
 
-<div @ref="ProductCardRef" class="product-card">
+<div @ref="ProductCardRef" class="product-card"
+     @onmousedown="MouseDown"  @onclick="GoToProductDetailPageOnClick">
     <span class="badge-discount">Oferta</span>
 
    <a class="img" style="background-image: url(@ImgUrl);">
@@ -34,7 +36,9 @@
 
 @*HideOrShownHiddenTitle-CodeStart*@
 @code {
-    private bool IsHiddenTitleVisible;
+    [Parameter]
+    public bool IsHiddenTitleVisible { get; set; } = false;
+
     private string PositionX = "0px";
     private string PositionY = "0px";
     private ElementReference ProductCardRef;
@@ -78,3 +82,23 @@
     public double CurrentScrollPosition { get; set; } = 0;
 
 }
+
+
+@*GoToProductDetailPage-CodeStart*@
+@code {
+    private double InitialClickLocation;
+
+    private void GoToProductDetailPageOnClick(MouseEventArgs e)
+        {
+            if (InitialClickLocation == e.ClientX)
+            {
+                NavigationManager.NavigateTo("ProductDetailPage/Perfumes/Nautica/123");
+            }
+        }
+
+    private void MouseDown(MouseEventArgs e)
+    {
+        InitialClickLocation = e.ClientX;
+    }
+}
+@*GoToProductDetailPage-CodeEnd*@

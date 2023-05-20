@@ -1,0 +1,16 @@
+﻿@page "/ProductDetailPage/{category}/{brand}/{id}"
+
+<div class="ProductDetailPage">
+    <ProductDetailComponent />
+</div>
+
+@code {
+    [Parameter]
+    public string category { get; set; } = string.Empty;
+
+    [Parameter]
+    public string brand { get; set; } = string.Empty;
+
+    [Parameter]
+    public string id { get; set; } = string.Empty;
+}
