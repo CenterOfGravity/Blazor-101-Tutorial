@@ -5,26 +5,48 @@
     <div id="@carousel" class="carousel @SnapTypeCssClassName"
          @onmousedown="OnMouseDown" @onmousemove="OnMouseMove" @onmouseup="OnMouseUp"
          @ontouchstart="OnTouchStart" @ontouchmove="OnTouchMove" @ontouchend="OnMouseUp">
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71P1nZa-IsL._SX466_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71d3wJAXuFL._AC_UL320_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/511OU9aET6L._SX466_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/811Q8CZTzhL._AC_SX522_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/611B25E53dL._AC_SX522_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71GY-XhzDpL._AC_SX679_.jpg" />
-                     
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71P1nZa-IsL._SX466_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/511OU9aET6L._SX466_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71d3wJAXuFL._AC_UL320_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/811Q8CZTzhL._AC_SX522_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/611B25E53dL._AC_SX522_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71GY-XhzDpL._AC_SX679_.jpg" />
-                     
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71P1nZa-IsL._SX466_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/511OU9aET6L._SX466_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71d3wJAXuFL._AC_UL320_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/811Q8CZTzhL._AC_SX522_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/611B25E53dL._AC_SX522_.jpg" />
-        <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71GY-XhzDpL._AC_SX679_.jpg" />
+         @if (!IsDetailPage)
+        {
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71P1nZa-IsL._SX466_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71d3wJAXuFL._AC_UL320_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/511OU9aET6L._SX466_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/811Q8CZTzhL._AC_SX522_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/611B25E53dL._AC_SX522_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71GY-XhzDpL._AC_SX679_.jpg" />
+
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71P1nZa-IsL._SX466_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/511OU9aET6L._SX466_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71d3wJAXuFL._AC_UL320_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/811Q8CZTzhL._AC_SX522_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/611B25E53dL._AC_SX522_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71GY-XhzDpL._AC_SX679_.jpg" />
+
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71P1nZa-IsL._SX466_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/511OU9aET6L._SX466_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71d3wJAXuFL._AC_UL320_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/811Q8CZTzhL._AC_SX522_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/611B25E53dL._AC_SX522_.jpg" />
+            <ProductCard IsHiddenTitleVisible="false" CurrentScrollPosition="CurrentScrollPosition" ImgUrl="https://m.media-amazon.com/images/I/71GY-XhzDpL._AC_SX679_.jpg" />
+        }
+        else
+        {
+            <span class="big-img-counter">@(SelectedBigImgRadioValue + "/" + 3)</span>
+
+            <div class="big-img" style="background-image: url('https://m.media-amazon.com/images/I/719RRyFIm+L._SX522_.jpg');"></div>
+            <div class="big-img" style="background-image: url('https://m.media-amazon.com/images/I/710kWI-hhKL._SX522_.jpg');"></div>
+            <div class="big-img" style="background-image: url('https://m.media-amazon.com/images/I/71d3wJAXuFL._SX522_.jpg');"></div>
+
+            <div class="big-img-radio-input">
+                <input type="radio" name="BIIGroup" id="1" value="1" checked="@(SelectedBigImgRadioValue.Equals(1))" @onchange="RadioBigImgOnChange" />
+                <label class="bullet" for="1"></label>
+
+                <input type="radio" name="BIIGroup" id="2" value="2" checked="@(SelectedBigImgRadioValue.Equals(2))" @onchange="RadioBigImgOnChange" />
+                <label class="bullet" for="2"></label>
+
+                <input type="radio" name="BIIGroup" id="3" value="3" checked="@(SelectedBigImgRadioValue.Equals(3))" @onchange="RadioBigImgOnChange" />
+                <label class="bullet" for="3"></label>
+            </div>
+        }
     </div>
     <i class="bi bi-chevron-right" style="@RightArrowCssCode" @onclick="@(() => ArrowOnClick("Right"))"></i>
 </div>
@@ -75,8 +97,11 @@
 
     private async Task OnMouseUp()
     {
+        SnapTypeCssClassName = "SnapTypeCssClassName";
         IsMouseDown = false;
         await HideOrShowArrrowIcons();
+
+        if (IsDetailPage) { await SelectBigImgRadioBulletOnMouseMoveOrArrowIconClick(); }
     }
 
     private async Task OnMouseLeave()
@@ -90,17 +115,18 @@
 
     private async Task ArrowOnClick(string RightOrLeft)
     {
+        SnapTypeCssClassName = "SnapTypeCssClassName";
         CurrentScrollPosition = await js.InvokeAsync<double>("GetScrollLeft", carousel);
         if (RightOrLeft == "Left")
         {
-            await js.InvokeVoidAsync("SetScrollLeft", carousel, CurrentScrollPosition - 180);
+            await js.InvokeVoidAsync("SetScrollLeft", carousel, CurrentScrollPosition - (IsDetailPage ? await js.InvokeAsync<int>("ElementClientWidth", carousel) : 180));
         }
         else
         {
-            await js.InvokeVoidAsync("SetScrollLeft", carousel, CurrentScrollPosition + 180);
+            await js.InvokeVoidAsync("SetScrollLeft", carousel, CurrentScrollPosition + (IsDetailPage ? await js.InvokeAsync<int>("ElementClientWidth", carousel) : 180));
         }
-        SnapTypeCssClassName = "SnapTypeCssClassName";
         await HideOrShowArrrowIcons();
+        if (IsDetailPage) { await SelectBigImgRadioBulletOnMouseMoveOrArrowIconClick(); }
     }
 
     private string LeftArrowCssCode = string.Empty;
@@ -108,11 +134,11 @@
 
     private async Task HideOrShowArrrowIcons()
     {
-        CurrentScrollPosition = await js.InvokeAsync<double>("GetScrollLeft", carousel);
-
-        int CarouselClientWidth = await js.InvokeAsync<int>("ElementClientWidth", carousel);
         int CarouselScrollWidth = await js.InvokeAsync<int>("ElementScrollWidth", carousel);
+        int CarouselClientWidth = await js.InvokeAsync<int>("ElementClientWidth", carousel);
         int MaxScrollPosition = CarouselScrollWidth - CarouselClientWidth;
+
+        CurrentScrollPosition = await js.InvokeAsync<double>("GetScrollLeft", carousel);
 
         LeftArrowCssCode = CurrentScrollPosition == 0 ? "visibility:hidden" : "visibility:visible";
         RightArrowCssCode = Math.Abs(CurrentScrollPosition - MaxScrollPosition) < 2 ? "visibility:hidden" : "visibility:visible";
@@ -134,3 +160,47 @@
     }
 }
 @*LifeCycleEnds-Start*@
+
+@*DetailPageBigImgCarouselCode-Start*@
+@code{
+        [Parameter]
+        public bool IsDetailPage { get; set; } = false;
+
+    private int SelectedBigImgRadioValue = 1;
+
+    private async Task RadioBigImgOnChange(ChangeEventArgs value)
+    {
+        int ValueOnChange = Int32.Parse(value.Value.ToString());
+
+        CurrentScrollPosition = await js.InvokeAsync<double>("GetScrollLeft", carousel);
+
+        int CarouselClientWidth = await js.InvokeAsync<int>("ElementClientWidth", carousel);
+
+        if (ValueOnChange == 1)
+        {
+            await js.InvokeVoidAsync("SetScrollLeft", carousel, 0);
+        }
+        else if (ValueOnChange > SelectedBigImgRadioValue)
+        {
+            await js.InvokeVoidAsync("SetScrollLeft", carousel, CurrentScrollPosition + CarouselClientWidth);
+        }
+        else if (ValueOnChange < SelectedBigImgRadioValue)
+        {
+            await js.InvokeVoidAsync("SetScrollLeft", carousel, CurrentScrollPosition - CarouselClientWidth);
+        }
+
+        await HideOrShowArrrowIcons();
+
+        SelectedBigImgRadioValue = ValueOnChange;
+    }
+
+    private async Task SelectBigImgRadioBulletOnMouseMoveOrArrowIconClick()
+    {
+        int CarouselScrollWidth = await js.InvokeAsync<int>("ElementScrollWidth", carousel);
+
+        CurrentScrollPosition = await js.InvokeAsync<double>("GetScrollLeft", carousel);
+
+        SelectedBigImgRadioValue = (int)Math.Ceiling((CurrentScrollPosition == 0 ? 1 : CurrentScrollPosition) / (CarouselScrollWidth / 3));
+    }
+}
+    @*DetailPageBigImgCarouselCode-Emd*@

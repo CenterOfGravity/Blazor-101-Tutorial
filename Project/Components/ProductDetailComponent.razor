@@ -1,5 +1,130 @@
-﻿<h3>ProductDetailComponent</h3>
+﻿<div class="product-detail-component">
+    <div class="column-one">
+        <div class="small-imgs">
+            <div class="small_img" style="background-image: url('https://m.media-amazon.com/images/I/719RRyFIm+L._SX522_.jpg');"></div>
+            <div class="small_img" style="background-image: url('https://m.media-amazon.com/images/I/710kWI-hhKL._SX522_.jpg');"></div>
+            <div class="small_img" style="background-image: url('https://m.media-amazon.com/images/I/71d3wJAXuFL._SX522_.jpg');"></div>
+        </div>
 
+        <div class="details-tittle">
+            Product details
+        </div>
+
+        <div class="details-paragraph">
+            Clásico, pero lejos de ser aburrido, Red Door es nuestra fragancia de Elizabeth Arden. Cada nota de lujo crea un aroma icónico que es vibrante, rico y atractivo.
+        </div>
+
+        <div class="key-details-points">
+            <div class="keypoint-title">
+                Departamento:
+            </div>
+            <div class="keypoint-info">
+                Mujer
+            </div>
+
+            <div class="keypoint-title">
+                Fabricante:
+            </div>
+            <div class="keypoint-info">
+                PerfumeWorldWide, Inc. Drop Ship
+            </div>
+
+            <div class="keypoint-title">
+                Forma del artículo:
+            </div>
+            <div class="keypoint-info">
+                Spray
+            </div>
+
+            <div class="keypoint-title">
+                Dimensiones del producto:
+            </div>
+            <div class="keypoint-info">
+                7 x 3.38 x 7 pulgadas; 3.53 Onzas
+            </div>
+        </div>
+    </div>
+
+    <div class="column-two">
+        <span class="badge-oferta">Oferta</span>
+        <CarouselComponent IsDetailPage="true" />
+    </div>
+
+    <div class="column-three">
+
+        <span class="badge-oferta">Oferta</span>
+
+        <div class="product-title">
+            Red Door by Elizabeth Arden, perfume para mujer, Eau de Parfum Spray 1.7 fl oz
+        </div>
+
+        <div class="price">
+            <span class="title">Price:</span>
+            <span class="discounted-price">US$72.00</span>
+            <span class="discount-porcentage">(-11%)</span>
+            <span class="original-price">US$80.00</span>
+        </div>
+
+        <div class="selected-and-available-container">
+            <div class="selected-product">
+                <span class="title">Selected:</span>
+                <span class="selected-size">5.3 ounces</span>
+            </div>
+
+            <div class="price-size-amount-color">
+                <input type="radio" name="rGroup" id="4" checked />
+                <label class="box" for="4">
+                    <span class="price">US$72.00</span>
+                    <span class="size">5.3 Ounce</span>
+                    <span class="color">Rojo</span>
+                    <span class="amount">5 in stuck</span>
+                </label>
+
+                <input type="radio" name="rGroup" id="5" />
+                <label class="box" for="5">
+                    <span class="price">US$72.00</span>
+                    <span class="size">5.3 Ounce</span>
+                    <span class="color">Rojo</span>
+                    <span class="amount">5 in stuck</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="description">
+
+            <div class="title">
+                Product Description
+            </div>
+
+            <div class="description-paragraphs">
+                Con un diseño elegante y un glamuroso acabado rojo brillante, el nuevo y sofisticado embalaje Red Door continúa celebrando el mundialmente famoso Red Door Spa y su emblemática puerta roja
+            </div>
+
+            <div class="description-key-points">
+                <div class="title-key-point">
+                    Marca
+                </div>
+
+                <div class="key-point-info">
+                    Elizabeth Arden
+                </div>
+            </div>
+        </div>
+
+        <div class="quantity-and-cart">
+
+            <label class="title" for="cars">Quantity:</label>
+            <select class="quantity-selector" id="cars">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+</div>
 @code {
 
 }
