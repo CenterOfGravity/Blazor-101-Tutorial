@@ -1,0 +1,23 @@
+﻿<div class="modal" @onclick="()=>CloseOnClick(true)" @onclick:stopPropagation="true">
+    <div class="insert-product" @onclick="()=>CloseOnClick(false)" @onclick:stopPropagation="true">
+        <span class="title">Agregar Producto</span>
+        <span class="close" @onclick="()=>CloseOnClick(true)">&times;</span>
+    </div>
+</div>
+
+
+
+@*CodeToCloseTheModal-Start*@
+@code {
+    [Parameter]
+    public EventCallback<bool> NotifyModalCloseStatus { get; set; }
+
+    private async Task CloseOnClick(bool value)
+    {
+        if (value)
+        {
+            await NotifyModalCloseStatus.InvokeAsync(false);
+        }
+    }
+}
+@*CodeToCloseTheModal-End*@

@@ -2,12 +2,17 @@
 @page "/"
 
 
+@if (IsInsertProductModalVisible)
+{
+    <InsertProductModal NotifyModalCloseStatus="@SetModalCloseStatus" />
+}
+
 <div class="sub-title">
     <h1>Todas Las Categorías</h1>
 
     <button type="button" class="button">
         Agregar Producto
-        <i class="bi bi-plus-lg"></i>
+        <i class="bi bi-plus-lg" @onclick="ShowInsertProductModal" ></i>
     </button>
 
     <h2>Perfumes</h2>   <span>Ver más</span>
@@ -16,3 +21,20 @@
 <div>
     <CarouselComponent/>
 </div>
+
+
+@*InsertProductModalCode-Start*@
+@code{
+    private bool IsInsertProductModalVisible;
+
+    private void ShowInsertProductModal()
+    {
+        IsInsertProductModalVisible = true;
+    }
+
+    private void SetModalCloseStatus(bool value)
+    {
+        IsInsertProductModalVisible = value;
+    }
+}
+@*InsertProductModalCode-End*@
