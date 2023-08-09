@@ -1,7 +1,192 @@
 ﻿<div class="modal" @onclick="()=>CloseOnClick(true)" @onclick:stopPropagation="true">
     <div class="insert-product" @onclick="()=>CloseOnClick(false)" @onclick:stopPropagation="true">
-        <span class="title">Agregar Producto</span>
-        <span class="close" @onclick="()=>CloseOnClick(true)">&times;</span>
+        <div class="header">
+            <span class="title">Product:</span>
+            <button type="button" style="background-color: gray" disabled="@IsIdDesabled">Buscar</button>
+            <button type="submit" form="EditFormID" style="background-color: green">Agregar</button>
+            <button type="submit" form="EditFormID" style="background-color: yellow" disabled>Editar</button>
+            <button type="submit" form="EditFormID" style="background-color: red" disabled>Eliminar</button>
+            <span class="close" @onclick="()=>CloseOnClick(true)">&times;</span>
+        </div>
+
+        <EditForm id="EditFormID" class="EditForm" Model="ProductInfo" OnValidSubmit="InsertProductOnValidSubmit">
+            <DataAnnotationsValidator />
+            <div>
+                <div class="check-box">
+                    <label for="1">Item ID:</label>
+                    <input type="checkbox" id="1" checked @onchange="OnChangeCheckBox" />
+                </div>
+
+                <label>Category:</label>
+                <label>Brand:</label>
+                <label>Visible:</label>
+
+                <InputText @bind-Value="ProductInfo.Id" type='text' disabled="@IsIdDesabled" class="IdInputText" />
+
+                <InputText @bind-Value="ProductInfo.Category" type='text' list="Category" />
+                <datalist id="Category">
+                    <option value="Perfumes">Perfumes</option>
+                    <option value="Sabanas">Sabanas</option>
+                </datalist>
+
+                <InputText @bind-Value="ProductInfo.Brand" type='text' list="Brand" />
+                <datalist id="Brand">
+                    <option value="HugoBoss">HugoBoss</option>
+                    <option value="RedDoor">RedDoor</option>
+                </datalist>
+
+                <InputSelect @bind-Value="ProductInfo.IsVisible">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </InputSelect>
+            </div>
+
+            <ValidationMessage For="@(() => ProductInfo.IsVisible)" />
+            <ValidationMessage For="@(() => ProductInfo.Category)" />
+            <ValidationMessage For="@(() => ProductInfo.Brand)" />
+
+            <label>Title:</label>
+            <InputText @bind-Value="ProductInfo.Title" type='text' />
+            <ValidationMessage For="@(() => ProductInfo.Title)" />
+
+
+            <label>KeyWords:</label>
+            <InputTextArea @bind-Value="ProductInfo.KeyWords" type='text' />
+            <ValidationMessage For="@(() => ProductInfo.KeyWords)" />
+
+
+
+            <label>Description:</label>
+            <InputTextArea @bind-Value="ProductInfo.Description" type='text' />
+            <ValidationMessage For="@(() => ProductInfo.Description )" />
+
+            <div class="key-points">
+                <label></label>
+                <label>Key Point Title:</label>
+
+                <div class="label-with-button">
+                    <label>Key Point Info:</label>
+
+                    <div>
+                        @if (DescriptionCounter >= 2)
+                        {
+                            <button @onclick='(() =>DescriptionCounterOnClick("-"))' type="button" class="counters-buttons">-</button>
+                        }
+                        <button @onclick='(() =>DescriptionCounterOnClick("+"))' type="button" class="counters-buttons">+</button>
+
+                    </div>
+                </div>
+                @for (int i = 0; i < DescriptionCounter; i++)
+                {
+                    int j = i;
+
+                    <label>@(@i + 1 + ".")</label>
+                    <InputText @bind-Value="ProductInfo.DescrKeyPointsTitle[j].Value" type='text' />
+
+                    <InputText @bind-Value="ProductInfo.DescrKeyPointsInfo[j].Value" type='text' />
+
+                }
+            </div>
+
+
+            @for (int i = 0; i < ImgUrlCounter; i++)
+            {
+                int j = i;
+                <div class="label-with-button">
+                    <label>Image @(@i + 1):</label>
+                    @if (j == 0)
+                    {
+                        <div>
+                            @if (ImgUrlCounter >= 2)
+                            {
+                                <button type="button" class="counters-buttons" @onclick='(() =>ImgUrlCounterOnClick("-"))'>-</button>
+                            }
+                            <button type="button" class="counters-buttons" @onclick='(() =>ImgUrlCounterOnClick("+"))'>+</button>
+                        </div>
+                    }
+
+                </div>
+
+                <InputText type='text' @bind-Value="ProductInfo.ImgURLs[j].Value" placeholder="--URL" />
+            }
+
+
+
+            <label style="margin-top: 4%">Details:</label>
+            <InputTextArea type='text' @bind-Value="ProductInfo.Details" />
+            <ValidationMessage For="@(() => ProductInfo.Details )" />
+
+            <div class="key-points">
+                <label></label>
+                <label>Key Point Title:</label>
+
+                <div class="label-with-button">
+                    <label>Key Point Info.</label>
+                    <div>
+                        @if (DetailsCounter >= 2)
+                        {
+                            <button type="button" class="counters-buttons" @onclick='(() =>DetailsCounterOnClick("-"))'>-</button>
+                        }
+                        <button type="button" class="counters-buttons" @onclick='(() =>DetailsCounterOnClick("+"))'>+</button>
+                    </div>
+                </div>
+
+                @for (int i = 0; i < DetailsCounter; i++)
+                {
+                    int j = i;
+
+                    <label>@(@i + 1 + ".")</label>
+
+                    <InputText type='text' @bind-Value="ProductInfo.DetailsKeyPointsTitle[j].Value" />
+
+                    <InputText type='text' @bind-Value="ProductInfo.DetailsKeyPointsInfo[j].Value" />
+
+                }
+            </div>
+ 
+            <div class="Size-color-price-quantity">
+                <label></label>
+                <label>O. Price:</label>
+                <label>D. Price:</label>
+                <label>Qty:</label>
+                <label>Color:</label>
+
+                <div class="label-with-button">
+                    <label>Size:</label>
+                    <div>
+                        @if (SizeColorPriceQuantityCounter >= 2)
+                        {
+                            <button type="button" class="counters-buttons" @onclick='(() =>SizeColorPriceQuantityCounterOnClick("-"))'>-</button>
+                        }
+                        <button type="button" class="counters-buttons" @onclick='(() =>SizeColorPriceQuantityCounterOnClick("+"))'>+</button>
+                    </div>
+                </div>
+
+                @for (int i = 0; i < SizeColorPriceQuantityCounter; i++)
+                {
+                    int j = i;
+                    <label>@(@i + 1 + ".")</label>
+
+
+                    <InputText type='number' @bind-Value="ProductInfo.OriginalPrices[j].Value" />
+
+                    <InputText type='number' @bind-Value="ProductInfo.DiscountedPrices[j].Value" />
+
+                    <InputText type='number' @bind-Value="ProductInfo.Quantities[j].Value" />
+
+                    <InputSelect @bind-Value="ProductInfo.Colors[j].Value" style="@($"background-color: {ProductInfo.Colors[j].Value}")">
+                        <option value="red" style="background-color: red;">Rojo</option>
+                        <option value="green" style="background-color: green">Verde</option>
+                        <option value="blue" style="background-color: blue">Azul</option>
+                        <option value="white" style="background-color: white; color:black">Blanco</option>
+                        <option value="black" style="background-color: black;">Negro</option>
+                    </InputSelect>
+
+                    <InputText type='text' @bind-Value="ProductInfo.Sizes[j].Value" />
+                }
+            </div>
+
+        </EditForm>
     </div>
 </div>
 
@@ -21,3 +206,106 @@
     }
 }
 @*CodeToCloseTheModal-End*@
+
+
+@*CodeToInsertProducts-Start*@
+@code{
+    private InsertProductClassModel ProductInfo = new InsertProductClassModel();
+
+    private void InsertProductOnValidSubmit()
+    {
+
+    }
+
+    private bool IsIdDesabled = true;
+
+    private void OnChangeCheckBox(ChangeEventArgs e)
+    {
+        IsIdDesabled = (bool)e.Value;
+    }
+
+    private int DescriptionCounter = 1;
+
+    private void DescriptionCounterOnClick(string Operador)
+    {
+        if (Operador == "+" && DescriptionCounter <= 2)
+        {
+            DescriptionCounter = DescriptionCounter + 1;
+            ProductInfo.DescrKeyPointsTitle.Add(new InsertProductClassModel.String { Value = "" });
+            ProductInfo.DescrKeyPointsInfo.Add(new InsertProductClassModel.String { Value = "" });
+        }
+
+        if (Operador == "-")
+        {
+            DescriptionCounter = DescriptionCounter - 1;
+            ProductInfo.DescrKeyPointsTitle.RemoveAt(ProductInfo.DescrKeyPointsTitle.Count - 1);
+            ProductInfo.DescrKeyPointsInfo.RemoveAt(ProductInfo.DescrKeyPointsTitle.Count - 1);
+        }
+    }
+
+
+    private int ImgUrlCounter = 1;
+
+    private void ImgUrlCounterOnClick(string Operador)
+    {
+        if (Operador == "+" && ImgUrlCounter <= 2)
+        {
+            ImgUrlCounter = ImgUrlCounter + 1;
+            ProductInfo.ImgURLs.Add(new InsertProductClassModel.String { Value = "" });
+        }
+
+        if (Operador == "-")
+        {
+            ImgUrlCounter = ImgUrlCounter - 1;
+            ProductInfo.ImgURLs.RemoveAt(ProductInfo.ImgURLs.Count - 1);
+        }
+    }
+
+
+
+    private int DetailsCounter = 1;
+
+    private void DetailsCounterOnClick(string Operador)
+    {
+        if (Operador == "+" && DetailsCounter <= 2)
+        {
+            DetailsCounter = DetailsCounter + 1;
+            ProductInfo.DetailsKeyPointsTitle.Add(new InsertProductClassModel.String { Value = "" });
+            ProductInfo.DetailsKeyPointsInfo.Add(new InsertProductClassModel.String { Value = "" });
+        }
+
+        if (Operador == "-")
+        {
+            DetailsCounter = DetailsCounter - 1;
+            ProductInfo.DetailsKeyPointsTitle.RemoveAt(ProductInfo.DetailsKeyPointsTitle.Count - 1);
+            ProductInfo.DetailsKeyPointsInfo.RemoveAt(ProductInfo.DetailsKeyPointsTitle.Count - 1);
+        }
+    }
+
+    private int SizeColorPriceQuantityCounter = 1;
+
+    private void SizeColorPriceQuantityCounterOnClick(string Operador)
+    {
+        if (Operador == "+" && SizeColorPriceQuantityCounter <= 2)
+        {
+            SizeColorPriceQuantityCounter = SizeColorPriceQuantityCounter + 1;
+            ProductInfo.Sizes.Add(new InsertProductClassModel.String { Value = "" });
+            ProductInfo.Colors.Add(new InsertProductClassModel.String { Value = "" });
+            ProductInfo.Quantities.Add(new InsertProductClassModel.String { Value = "" });
+            ProductInfo.OriginalPrices.Add(new InsertProductClassModel.String { Value = "" });
+            ProductInfo.DiscountedPrices.Add(new InsertProductClassModel.String { Value = "" });
+        }
+
+        if (Operador == "-")
+        {
+            SizeColorPriceQuantityCounter = SizeColorPriceQuantityCounter - 1;
+            ProductInfo.Sizes.RemoveAt(ProductInfo.Sizes.Count - 1);
+            ProductInfo.Colors.RemoveAt(ProductInfo.Colors.Count - 1);
+            ProductInfo.Quantities.RemoveAt(ProductInfo.Quantities.Count - 1);
+            ProductInfo.OriginalPrices.RemoveAt(ProductInfo.OriginalPrices.Count - 1);
+            ProductInfo.DiscountedPrices.RemoveAt(ProductInfo.DiscountedPrices.Count - 1);
+        }
+    }
+
+}
+@*CodeToInsertProducts-End*@
