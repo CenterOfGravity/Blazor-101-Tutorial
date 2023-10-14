@@ -1,4 +1,4 @@
-﻿<div class="modal" @onclick="()=>CloseOnClick(true)" @onclick:stopPropagation="true">
+﻿<div class="modal">
     <div class="insert-product" @onclick="()=>CloseOnClick(false)" @onclick:stopPropagation="true">
         <div class="header">
             <span class="title">Product:</span>
@@ -11,17 +11,52 @@
 
         <EditForm id="EditFormID" class="EditForm" Model="ProductInfo" OnValidSubmit="InsertProductOnValidSubmit">
             <DataAnnotationsValidator />
-            <div>
+
+            <div class="container">
+                <label>Database Type:</label>
+
+                <label>RealTime List Name:</label>
+
+                <InputSelect @bind-Value="ProductInfo.DataBaseType">
+                    <option value="FireStore&RealTime">FireStore & RealTime</option>
+                    <option value="FireStore">FireStore Database</option>
+                    <option value="RealTime">RealTime Database</option>
+                </InputSelect>
+
+                <InputSelect @bind-Value="ProductInfo.RealTimeDBProductsListName">
+                    <option value="IndexPageProductsList">Index Page Products List</option>
+                    <option value="ShoppingPageProductsList">Shopping Page Products List</option>
+                </InputSelect>
+
+            </div>
+
+            <ValidationMessage For="@(() => ProductInfo.DataBaseType)" />
+            <ValidationMessage For="@(() => ProductInfo.RealTimeDBProductsListName)" />
+
+
+            <div class="container">
                 <div class="check-box">
                     <label for="1">Item ID:</label>
                     <input type="checkbox" id="1" checked @onchange="OnChangeCheckBox" />
                 </div>
 
-                <label>Category:</label>
-                <label>Brand:</label>
                 <label>Visible:</label>
 
                 <InputText @bind-Value="ProductInfo.Id" type='text' disabled="@IsIdDesabled" class="IdInputText" />
+
+
+                <InputSelect @bind-Value="ProductInfo.IsVisible">
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </InputSelect>
+            </div>
+                <ValidationMessage For="@(() => ProductInfo.Id)" />
+                <ValidationMessage For="@(() => ProductInfo.IsVisible)" />
+            <div class="container">
+
+                <label>Category:</label>
+                <label>Brand:</label>
+
 
                 <InputText @bind-Value="ProductInfo.Category" type='text' list="Category" />
                 <datalist id="Category">
@@ -35,13 +70,10 @@
                     <option value="RedDoor">RedDoor</option>
                 </datalist>
 
-                <InputSelect @bind-Value="ProductInfo.IsVisible">
-                    <option value="true">True</option>
-                    <option value="false">False</option>
-                </InputSelect>
+
             </div>
 
-            <ValidationMessage For="@(() => ProductInfo.IsVisible)" />
+
             <ValidationMessage For="@(() => ProductInfo.Category)" />
             <ValidationMessage For="@(() => ProductInfo.Brand)" />
 

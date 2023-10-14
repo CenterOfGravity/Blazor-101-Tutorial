@@ -4,6 +4,10 @@ namespace Project.Models
 {
     public class InsertProductClassModel
     {
+        [Required]
+        public string DataBaseType { get; set; } = "";
+
+        public string RealTimeDBProductsListName { get; set; } = "";
 
         public string Id { get; set; } = "";
 
