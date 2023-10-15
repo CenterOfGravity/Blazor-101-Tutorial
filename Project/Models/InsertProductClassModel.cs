@@ -1,14 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Project.Validations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Project.Models
 {
     public class InsertProductClassModel
     {
         [Required]
+        //Associated Property
         public string DataBaseType { get; set; } = "";
 
         public string RealTimeDBProductsListName { get; set; } = "";
 
+        [RequiredIf(nameof(DataBaseType), "RealTime", ErrorMessage = "The Id field is required.")]
+        //Dependent Property
         public string Id { get; set; } = "";
 
         [Required]

@@ -17,7 +17,7 @@
 
                 <label>RealTime List Name:</label>
 
-                <InputSelect @bind-Value="ProductInfo.DataBaseType">
+                <InputSelect @bind-Value="ProductInfo.DataBaseType" @bind-Value:after="DataBaseTypeoBindAfter">
                     <option value="FireStore&RealTime">FireStore & RealTime</option>
                     <option value="FireStore">FireStore Database</option>
                     <option value="RealTime">RealTime Database</option>
@@ -87,46 +87,49 @@
             <ValidationMessage For="@(() => ProductInfo.KeyWords)" />
 
 
+            @if (!ProductInfo.DataBaseType.Equals("RealTime"))
+            {
+                <label>Description:</label>
+                <InputTextArea @bind-Value="ProductInfo.Description" type='text' />
+                <ValidationMessage For="@(() => ProductInfo.Description )" />
 
-            <label>Description:</label>
-            <InputTextArea @bind-Value="ProductInfo.Description" type='text' />
-            <ValidationMessage For="@(() => ProductInfo.Description )" />
+                <div class="key-points">
+                    <label></label>
+                    <label>Key Point Title:</label>
 
-            <div class="key-points">
-                <label></label>
-                <label>Key Point Title:</label>
+                    <div class="label-with-button">
+                        <label>Key Point Info:</label>
 
-                <div class="label-with-button">
-                    <label>Key Point Info:</label>
+                        <div>
+                            @if (DescriptionCounter >= 2)
+                            {
+                                <button @onclick='(() =>DescriptionCounterOnClick("-"))' type="button" class="counters-buttons">-</button>
+                            }
+                            <button @onclick='(() =>DescriptionCounterOnClick("+"))' type="button" class="counters-buttons">+</button>
 
-                    <div>
-                        @if (DescriptionCounter >= 2)
-                        {
-                            <button @onclick='(() =>DescriptionCounterOnClick("-"))' type="button" class="counters-buttons">-</button>
-                        }
-                        <button @onclick='(() =>DescriptionCounterOnClick("+"))' type="button" class="counters-buttons">+</button>
-
+                        </div>
                     </div>
+                    @for (int i = 0; i < DescriptionCounter; i++)
+                    {
+                        int j = i;
+
+                        <label>@(
+                                             @i + 1 + "."
+                                             )</label>
+                        <InputText @bind-Value="ProductInfo.DescrKeyPointsTitle[j].Value" type='text' />
+
+                        <InputText @bind-Value="ProductInfo.DescrKeyPointsInfo[j].Value" type='text' />
+
+                    }
                 </div>
-                @for (int i = 0; i < DescriptionCounter; i++)
-                {
-                    int j = i;
-
-                    <label>@(@i + 1 + ".")</label>
-                    <InputText @bind-Value="ProductInfo.DescrKeyPointsTitle[j].Value" type='text' />
-
-                    <InputText @bind-Value="ProductInfo.DescrKeyPointsInfo[j].Value" type='text' />
-
-                }
-            </div>
-
+            }
 
             @for (int i = 0; i < ImgUrlCounter; i++)
             {
                 int j = i;
                 <div class="label-with-button">
                     <label>Image @(@i + 1):</label>
-                    @if (j == 0)
+                    @if (j == 0 && !ProductInfo.DataBaseType.Equals("RealTime"))
                     {
                         <div>
                             @if (ImgUrlCounter >= 2)
@@ -143,39 +146,43 @@
             }
 
 
+            @if (!ProductInfo.DataBaseType.Equals("RealTime"))
+            {
+                <label style="margin-top: 4%">Details:</label>
+                <InputTextArea type='text' @bind-Value="ProductInfo.Details" />
+                <ValidationMessage For="@(() => ProductInfo.Details )" />
 
-            <label style="margin-top: 4%">Details:</label>
-            <InputTextArea type='text' @bind-Value="ProductInfo.Details" />
-            <ValidationMessage For="@(() => ProductInfo.Details )" />
+                <div class="key-points">
+                    <label></label>
+                    <label>Key Point Title:</label>
 
-            <div class="key-points">
-                <label></label>
-                <label>Key Point Title:</label>
-
-                <div class="label-with-button">
-                    <label>Key Point Info.</label>
-                    <div>
-                        @if (DetailsCounter >= 2)
-                        {
-                            <button type="button" class="counters-buttons" @onclick='(() =>DetailsCounterOnClick("-"))'>-</button>
-                        }
-                        <button type="button" class="counters-buttons" @onclick='(() =>DetailsCounterOnClick("+"))'>+</button>
+                    <div class="label-with-button">
+                        <label>Key Point Info.</label>
+                        <div>
+                            @if (DetailsCounter >= 2)
+                            {
+                                <button type="button" class="counters-buttons" @onclick='(() =>DetailsCounterOnClick("-"))'>-</button>
+                            }
+                            <button type="button" class="counters-buttons" @onclick='(() =>DetailsCounterOnClick("+"))'>+</button>
+                        </div>
                     </div>
+
+                    @for (int i = 0; i < DetailsCounter; i++)
+                    {
+                        int j = i;
+
+                        <label>@(
+                                             @i + 1 + "."
+                                             )</label>
+
+                        <InputText type='text' @bind-Value="ProductInfo.DetailsKeyPointsTitle[j].Value" />
+
+                        <InputText type='text' @bind-Value="ProductInfo.DetailsKeyPointsInfo[j].Value" />
+
+                    }
                 </div>
+            }
 
-                @for (int i = 0; i < DetailsCounter; i++)
-                {
-                    int j = i;
-
-                    <label>@(@i + 1 + ".")</label>
-
-                    <InputText type='text' @bind-Value="ProductInfo.DetailsKeyPointsTitle[j].Value" />
-
-                    <InputText type='text' @bind-Value="ProductInfo.DetailsKeyPointsInfo[j].Value" />
-
-                }
-            </div>
- 
             <div class="Size-color-price-quantity">
                 <label></label>
                 <label>O. Price:</label>
@@ -199,22 +206,23 @@
                     int j = i;
                     <label>@(@i + 1 + ".")</label>
 
+                    @if (!ProductInfo.DataBaseType.Equals("RealTime") || i == 0)
+                    {
+                        <InputText type='number' @bind-Value="ProductInfo.OriginalPrices[j].Value" />
 
-                    <InputText type='number' @bind-Value="ProductInfo.OriginalPrices[j].Value" />
+                        <InputText type='number' @bind-Value="ProductInfo.DiscountedPrices[j].Value" />
 
-                    <InputText type='number' @bind-Value="ProductInfo.DiscountedPrices[j].Value" />
+                        <InputText type='number' @bind-Value="ProductInfo.Quantities[j].Value" />
 
-                    <InputText type='number' @bind-Value="ProductInfo.Quantities[j].Value" />
-
-                    <InputSelect @bind-Value="ProductInfo.Colors[j].Value" style="@($"background-color: {ProductInfo.Colors[j].Value}")">
-                        <option value="red" style="background-color: red;">Rojo</option>
-                        <option value="green" style="background-color: green">Verde</option>
-                        <option value="blue" style="background-color: blue">Azul</option>
-                        <option value="white" style="background-color: white; color:black">Blanco</option>
-                        <option value="black" style="background-color: black;">Negro</option>
-                    </InputSelect>
-
-                    <InputText type='text' @bind-Value="ProductInfo.Sizes[j].Value" />
+                        <InputSelect @bind-Value="ProductInfo.Colors[j].Value" style="@($"background-color: {ProductInfo.Colors[j].Value}")">
+                            <option value="red" style="background-color: red;">Rojo</option>
+                            <option value="green" style="background-color: green">Verde</option>
+                            <option value="blue" style="background-color: blue">Azul</option>
+                            <option value="white" style="background-color: white; color:black">Blanco</option>
+                            <option value="black" style="background-color: black;">Negro</option>
+                        </InputSelect>
+                    }
+                    <InputText type='text' @bind-Value="ProductInfo.Sizes[j].Value" style=" grid-column: 6 / 7;" />
                 }
             </div>
 
@@ -254,6 +262,14 @@
     private void OnChangeCheckBox(ChangeEventArgs e)
     {
         IsIdDesabled = (bool)e.Value;
+    }
+
+    private void DataBaseTypeoBindAfter()
+    {
+        if (ProductInfo.DataBaseType.Equals("RealTime"))
+        {
+            ImgUrlCounter = 1;
+        }
     }
 
     private int DescriptionCounter = 1;
