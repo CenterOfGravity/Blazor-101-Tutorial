@@ -9,7 +9,11 @@ namespace Project.Models
         //Associated Property
         public string DataBaseType { get; set; } = "";
 
+
+        [RequiredIfNot(nameof(DataBaseType), "FireStore", ErrorMessage = "The RealTime List Name field is required.")]
         public string RealTimeDBProductsListName { get; set; } = "";
+
+
 
         [RequiredIf(nameof(DataBaseType), "RealTime", ErrorMessage = "The Id field is required.")]
         //Dependent Property
@@ -27,11 +31,14 @@ namespace Project.Models
         [Required]
         public string Brand { get; set; } = "";
 
-        [Required]
+
+        [RequiredIfNot(nameof(DataBaseType), "FireStore", ErrorMessage = "The KeyWords field is required.")]
         public string KeyWords { get; set; } = "";
 
-        [Required]
+
+        [RequiredIfNot(nameof(DataBaseType), "RealTime", ErrorMessage = "The Description field is required.")]
         public string Description { get; set; } = "";
+
 
         public List<String> DescrKeyPointsTitle { get; set; } = new List<String> { new String { Value = "" } };
         public List<String> DescrKeyPointsInfo { get; set; } = new List<String> { new String { Value = "" } };
@@ -43,8 +50,9 @@ namespace Project.Models
         public List<String> ImgURLs { get; set; } = new List<String> { new String { Value = "" } };
 
 
-        [Required]
+        [RequiredIfNot(nameof(DataBaseType), "RealTime", ErrorMessage = "The Details field is required.")]
         public string Details { get; set; } = "";
+
 
         public List<String> DetailsKeyPointsTitle { get; set; } = new List<String> { new String { Value = "" } };
 
