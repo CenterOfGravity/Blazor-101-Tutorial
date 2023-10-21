@@ -15,7 +15,7 @@
             <div class="container">
                 <label>Database Type:</label>
 
-                <label>RealTime List Name:</label>
+                <label hidden=@(ProductInfo.DataBaseType.Equals("FireStore"))>RealTime List Name:</label>
 
                 <InputSelect @bind-Value="ProductInfo.DataBaseType" @bind-Value:after="DataBaseTypeoBindAfter">
                     <option value="FireStore&RealTime">FireStore & RealTime</option>
@@ -23,7 +23,7 @@
                     <option value="RealTime">RealTime Database</option>
                 </InputSelect>
 
-                <InputSelect @bind-Value="ProductInfo.RealTimeDBProductsListName">
+                <InputSelect @bind-Value="ProductInfo.RealTimeDBProductsListName" hidden=@(ProductInfo.DataBaseType.Equals("FireStore"))>
                     <option value="IndexPageProductsList">Index Page Products List</option>
                     <option value="ShoppingPageProductsList">Shopping Page Products List</option>
                 </InputSelect>
@@ -81,11 +81,12 @@
             <InputText @bind-Value="ProductInfo.Title" type='text' />
             <ValidationMessage For="@(() => ProductInfo.Title)" />
 
-
+            @if (!ProductInfo.DataBaseType.Equals("FireStore"))
+            {
             <label>KeyWords:</label>
             <InputTextArea @bind-Value="ProductInfo.KeyWords" type='text' />
             <ValidationMessage For="@(() => ProductInfo.KeyWords)" />
-
+            }
 
             @if (!ProductInfo.DataBaseType.Equals("RealTime"))
             {
