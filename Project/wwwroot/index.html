@@ -61,19 +61,20 @@
 
     <script type="module">
         // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getAuth, setPersistence, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, browserLocalPersistence , browserSessionPersistence, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+        import { getAuth, setPersistence, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, browserLocalPersistence, browserSessionPersistence, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyBweY0K13TldzPKvvXGB6CQQoOCxq-vYBc",
-            authDomain: "project-18395.firebaseapp.com",
-            projectId: "project-18395",
-            storageBucket: "project-18395.appspot.com",
-            messagingSenderId: "729063269694",
-            appId: "1:729063269694:web:e6b5b4141d6e319142386f"
+            apiKey: "AIzaSyCYgYsyu5iJbNM47vZaCop2CVf8AJbyt8c",
+            authDomain: "project-6ce9f.firebaseapp.com",
+            projectId: "project-6ce9f",
+            storageBucket: "project-6ce9f.appspot.com",
+            messagingSenderId: "169185885455",
+            appId: "1:169185885455:web:01b8b21000c6bf0981127a"
         };
 
         // Initialize Firebase
@@ -177,6 +178,55 @@
                 alert(error);
                 // ...
             });
+        }
+
+
+        // Initialize Cloud Firestore and get a reference to the service
+        const dbFS = getFirestore(app);
+
+        window.FireStoreDBSetProduct = async function (
+            Id, Category, Brand, Title,
+            Description, DescrKeyPointsTitle, DescrKeyPointsInfo,
+            Details, DetailsKeyPointsTitle, DetailsKeyPointsInfo,
+            OriginalPrices, DiscountedPrices, Quantities,
+            Colors, Sizes, ImgURLs) {
+
+            const ProductInfo =
+            {
+                Category: Category,
+                Brand: Brand,
+                Title: Title,
+                Description: Description,
+                DescrKeyPointsTitle: DescrKeyPointsTitle,
+                DescrKeyPointsInfo: DescrKeyPointsInfo,
+                Details: Details,
+                DetailsKeyPointsTitle: DetailsKeyPointsTitle,
+                DetailsKeyPointsInfo: DetailsKeyPointsInfo,
+                OriginalPrices: OriginalPrices,
+                DiscountedPrices: DiscountedPrices,
+                Quantities: Quantities,
+                Colors: Colors,
+                Sizes: Sizes,
+                ImgURLs: ImgURLs
+            };
+
+            try {
+                let docRef;
+                if (!Id) {
+                    docRef = await addDoc(collection(dbFS, Category), ProductInfo);
+                } else {
+                    await setDoc(doc(dbFS, Category, Id), ProductInfo);
+                }
+
+                alert("Item succesfully added to FireStore");
+
+                return docRef.id;
+
+            } catch (e) {
+                alert("Error Adding document to FireStore: " + e);
+                //  console.error("Error Adding document to FireStore: ", e);
+            }
+
         }
     </script>
 </body>

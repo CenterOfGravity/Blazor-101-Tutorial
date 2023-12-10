@@ -1,4 +1,6 @@
-﻿<div class="modal">
+﻿@inject IJSRuntime js
+
+<div class="modal">
     <div class="insert-product" @onclick="()=>CloseOnClick(false)" @onclick:stopPropagation="true">
         <div class="header">
             <span class="title">Product:</span>
@@ -253,9 +255,34 @@
 @code{
     private InsertProductClassModel ProductInfo = new InsertProductClassModel();
 
-    private void InsertProductOnValidSubmit()
+    private async Task InsertProductOnValidSubmit()
     {
+        string ProductId = string.Empty;
 
+        if (ProductInfo.DataBaseType == "FireStore" || ProductInfo.DataBaseType == "FireStore&RealTime")
+        {
+            ProductId = await js.InvokeAsync<string>("FireStoreDBSetProduct",
+                        ProductInfo.Id, ProductInfo.Category, ProductInfo.Brand, ProductInfo.Title,
+
+                        ProductInfo.Description, ProductInfo.DescrKeyPointsTitle.Select(x => x.Value).ToArray(), ProductInfo.DescrKeyPointsInfo.Select(x => x.Value).ToArray(),
+            ProductInfo.Details, ProductInfo.DetailsKeyPointsTitle.Select(x => x.Value).ToArray(), ProductInfo.DetailsKeyPointsInfo.Select(x => x.Value).ToArray(),
+
+                        ProductInfo.OriginalPrices.Select(x => x.Value).ToArray(), ProductInfo.DiscountedPrices.Select(x => x.Value).ToArray(), ProductInfo.Quantities.Select(x => x.Value).ToArray(),
+            ProductInfo.Colors.Select(x => x.Value).ToArray(), ProductInfo.Sizes.Select(x => x.Value).ToArray(), ProductInfo.ImgURLs.Select(x => x.Value).ToArray()
+            );
+        }
+
+
+        //ToCleanOrNotCleanTheEditFormAfterSummiting
+        if (ProductInfo.DataBaseType == "FireStore&RealTime")
+        {
+         //   if (IsSuccesfull && !string.IsNullOrEmpty(ProductId)) { ProductInfo = new InsertProductClassModel(); }
+        }
+        else
+        {
+        //    if (IsSuccesfull || !string.IsNullOrEmpty(ProductId)) { ProductInfo = new InsertProductClassModel(); }
+        }
+        //ToCleanOrNotCleanTheEditFormAfterSummiting
     }
 
     private bool IsIdDesabled = true;
